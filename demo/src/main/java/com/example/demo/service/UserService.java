@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import com.example.demo.userVO.UserVO;
+import com.example.demo.controller.userVO.UserVO;
 import com.example.demo.entity.UserByUser;
 
 /**
