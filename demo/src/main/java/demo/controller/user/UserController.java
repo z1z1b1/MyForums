@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.controller.userVO.UserVO;
+import demo.VO.UserVO;
 import demo.entity.UserByUser;
 import demo.service.UserService;
 

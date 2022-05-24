@@ -2,7 +2,7 @@ package demo.service;
 
 import java.util.List;
 
-import demo.controller.userVO.UserVO;
+import demo.VO.UserVO;
 import org.json.JSONException;
 
 import demo.entity.UserByUser;

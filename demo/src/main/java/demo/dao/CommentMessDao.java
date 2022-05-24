@@ -2,6 +2,7 @@ package demo.dao;
 
 import java.util.List;
 
+import demo.VO.CommentVO;
 import demo.entity.CommentMess;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -72,5 +73,12 @@ public interface CommentMessDao {
      * @return 影响行数
      */
     int deleteById(Long commentId);
+
+    /**
+     * 查询个类别前十条数据
+     *
+     * @return 对象列表
+     */
+    List<CommentVO> queryLimt();
 
 }

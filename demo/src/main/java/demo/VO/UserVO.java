@@ -1,4 +1,4 @@
-package demo.controller.userVO;
+package demo.VO;
 
 import java.io.Serializable;
 import java.util.Date;

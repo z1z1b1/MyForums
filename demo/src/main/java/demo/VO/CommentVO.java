@@ -1,18 +1,10 @@
-package demo.entity;
-
-import java.io.Serializable;
-import java.util.Date;
+package demo.VO;
 
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * (CommentMess)实体类
- *
- * @author makejava
- * @since 2022-01-25 13:50:21
- */
-public class CommentMess implements Serializable {
-    private static final long serialVersionUID = -48099251291840105L;
+import java.util.Date;
+
+public class CommentVO {
     /**
      * 评论id
      */
@@ -29,6 +21,10 @@ public class CommentMess implements Serializable {
      * 消息类别id
      */
     private Integer categoryId;
+    /**
+     * 类别名称
+     */
+    private String categoryName;
     /**
      * 评论消息id
      */
@@ -84,6 +80,14 @@ public class CommentMess implements Serializable {
         this.categoryId = categoryId;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public Integer getUserId() {
         return userId;
     }
@@ -123,5 +127,4 @@ public class CommentMess implements Serializable {
     public void setCommentFileByte(byte[] commentFileByte) {
         this.commentFileByte = commentFileByte;
     }
-
 }

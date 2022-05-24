@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
+import demo.VO.CommentVO;
 import demo.service.CommentMessService;
 import org.springframework.stereotype.Service;
 
@@ -103,4 +104,14 @@ public class CommentMessServiceImpl implements CommentMessService {
     public boolean deleteById(Long commentId) {
         return this.commentMessDao.deleteById(commentId) > 0;
     }
+
+    /**
+     * 查询个类别前十条数据
+     * @return 对象列表
+     */
+    @Override
+    public List<CommentVO> queryLimt() {
+        return this.commentMessDao.queryLimt();
+    }
+
 }
