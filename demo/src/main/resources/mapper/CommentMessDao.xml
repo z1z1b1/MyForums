@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.dao.CommentMessDao">
+<mapper namespace="demo.dao.CommentMessDao">
 
-    <resultMap id="BaseResultMap" type="com.example.demo.entity.CommentMess">
+    <resultMap id="BaseResultMap" type="demo.entity.CommentMess">
         <!--@Table comment_mess-->
         <result property="commentId" column="comment_id" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
