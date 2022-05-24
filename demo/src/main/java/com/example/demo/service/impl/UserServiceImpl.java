@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.controller.userVO.UserVO;
+import com.example.demo.userVO.UserVO;
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.UserByUser;
 import com.example.demo.service.UserService;
