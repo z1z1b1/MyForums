@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://175.24.164.220:3306/test_database?serverTimezone=GMT&useSSL=false}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 8764
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+    session:
+      timeout: 1800
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml  
+  configuration:
+    mapUnderscoreToCamelCase: true
+logging:
+  level:
+    org.apache.ibatis: debug
+    com.example.demo: debug

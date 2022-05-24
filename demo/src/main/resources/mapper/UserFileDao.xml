@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserFileDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.UserFile">
+        <!--@Table user_file-->
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="commentId" column="comment_id" jdbcType="INTEGER"/>
+        <result property="fileUuid" column="file_uuid" jdbcType="VARCHAR"/>
+        <result property="filePath" column="file_path" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          user_id, comment_id, file_uuid, file_path
+        from test_database.user_file
+        where file_uuid = #{fileUuid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          user_id, comment_id, file_uuid, file_path
+        from test_database.user_file
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          user_id, comment_id, file_uuid, file_path
+        from test_database.user_file
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="fileUuid != null and fileUuid != ''">
+                and file_uuid = #{fileUuid}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into test_database.user_file(user_id, comment_id, file_uuid, file_path)
+        values (#{userId}, #{commentId}, #{fileUuid}, #{filePath})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test_database.user_file
+        <set>
+            <if test="filePath != null and filePath != ''">
+                file_path = #{filePath},
+            </if>
+        </set>
+        where file_uuid = #{fileUuid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test_database.user_file where file_uuid = #{fileUuid}
+    </delete>
+
+    <delete id="deleteByUser">
+        delete from test_database.user_file userfile where 1=1
+        <if test="userFileList != null and userFileList.size() > 0">
+            AND userfile.file_uuid in
+            <foreach collection="userFileList" item="list" index="index" open="(" separator="," close=")">
+                 #{list.fileUuid}
+            </foreach>
+
+        </if>
+    </delete>
+
+    <select id="fileList" resultMap ="BaseResultMap">
+        select * from test_database.user_file where user_id = #{userId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.UserByUser">
+        <!--@Table user-->
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="homeAddress" column="home_address" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="lastUpdate" column="last_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          user_id, user_name, sex, age, home_address, phone, email, create_date, last_update
+        from test_database.user
+        where user_id = #{userId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          user_id, user_name, sex, age, home_address, phone, email, create_date, last_update
+        from test_database.user
+        limit #{offset}, #{limit}
+    </select>
+    <select id="selectByName" resultMap="BaseResultMap">
+        select
+            user_id, user_name, sex, age, home_address, phone, email, create_date, last_update,user_password
+        from test_database.user
+        where
+            user_name = #{userName}
+    </select>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          user_id, user_name, sex, age, home_address, phone, email, create_date, last_update
+        from test_database.user
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="homeAddress != null and homeAddress != ''">
+                and home_address = #{homeAddress}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="lastUpdate != null">
+                and last_update = #{lastUpdate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into test_database.user(user_name, sex, age, home_address, phone, email, create_date, last_update)
+        values (#{userName}, #{sex}, #{age}, #{homeAddress}, #{phone}, #{email}, #{createDate}, #{lastUpdate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test_database.user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="homeAddress != null and homeAddress != ''">
+                home_address = #{homeAddress},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="lastUpdate != null">
+                last_update = #{lastUpdate},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test_database.user where user_id = #{userId}
+    </delete>
+
+    <select id="login" resultMap="BaseResultMap">
+        select * from test_database.user where user_id = #{userId} and user_password = #{userPassword}
+    </select>
+</mapper>

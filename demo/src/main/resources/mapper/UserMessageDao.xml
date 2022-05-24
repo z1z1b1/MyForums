@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserMessageDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.UserMessage">
+        <!--@Table user_message-->
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="publishId" column="publish_id" jdbcType="INTEGER"/>
+        <result property="versionNumber" column="version_number" jdbcType="INTEGER"/>
+        <result property="publishContent" column="publish_content" jdbcType="VARCHAR"/>
+        <result property="publishFile" column="publish_file" jdbcType="VARCHAR"/>
+        <result property="lastUpdate" column="last_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          user_id, create_date, publish_id, version_number, publish_content, publish_file, last_update
+        from test_database.user_message
+        where user_id = #{userId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          user_id, create_date, publish_id, version_number, publish_content, publish_file, last_update
+        from test_database.user_message
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          user_id, create_date, publish_id, version_number, publish_content, publish_file, last_update
+        from test_database.user_message
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="publishId != null">
+                and publish_id = #{publishId}
+            </if>
+            <if test="versionNumber != null">
+                and version_number = #{versionNumber}
+            </if>
+            <if test="publishContent != null and publishContent != ''">
+                and publish_content = #{publishContent}
+            </if>
+            <if test="publishFile != null and publishFile != ''">
+                and publish_file = #{publishFile}
+            </if>
+            <if test="lastUpdate != null">
+                and last_update = #{lastUpdate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into test_database.user_message(create_date, publish_id, version_number, publish_content, publish_file, last_update)
+        values (#{createDate}, #{publishId}, #{versionNumber}, #{publishContent}, #{publishFile}, #{lastUpdate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test_database.user_message
+        <set>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="publishId != null">
+                publish_id = #{publishId},
+            </if>
+            <if test="versionNumber != null">
+                version_number = #{versionNumber},
+            </if>
+            <if test="publishContent != null and publishContent != ''">
+                publish_content = #{publishContent},
+            </if>
+            <if test="publishFile != null and publishFile != ''">
+                publish_file = #{publishFile},
+            </if>
+            <if test="lastUpdate != null">
+                last_update = #{lastUpdate},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test_database.user_message where user_id = #{userId}
+    </delete>
+
+</mapper>
