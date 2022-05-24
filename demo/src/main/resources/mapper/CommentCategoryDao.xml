@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.CommentCategoryDao">
+
+    <resultMap id="BaseResultMap" type="demo.entity.CommentCategory">
+        <!--@Table comment_category-->
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+        <result property="lastUpdate" column="last_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          category_id, category_name, last_update
+        from test_database.comment_category
+        where category_id = #{categoryId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          category_id, category_name, last_update
+        from test_database.comment_category
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          category_id, category_name, last_update
+        from test_database.comment_category
+        <where>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="categoryName != null and categoryName != ''">
+                and category_name = #{categoryName}
+            </if>
+            <if test="lastUpdate != null">
+                and last_update = #{lastUpdate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="categoryId" useGeneratedKeys="true">
+        insert into test_database.comment_category(category_name, last_update)
+        values (#{categoryName}, #{lastUpdate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test_database.comment_category
+        <set>
+            <if test="categoryName != null and categoryName != ''">
+                category_name = #{categoryName},
+            </if>
+            <if test="lastUpdate != null">
+                last_update = #{lastUpdate},
+            </if>
+        </set>
+        where category_id = #{categoryId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test_database.comment_category where category_id = #{categoryId}
+    </delete>
+
+    <!--查询所有-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+            category_id, category_name, last_update
+        from test_database.comment_category
+    </select>
+</mapper>
