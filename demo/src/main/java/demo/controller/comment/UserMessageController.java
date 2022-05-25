@@ -1,13 +1,12 @@
-package demo.controller.user;
+package demo.controller.comment;
 
-import javax.annotation.Resource;
-
+import demo.entity.UserMessage;
+import demo.service.UserMessageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.entity.UserMessage;
-import demo.service.UserMessageService;
+import javax.annotation.Resource;
 
 /**
  * (UserMessage)表控制层

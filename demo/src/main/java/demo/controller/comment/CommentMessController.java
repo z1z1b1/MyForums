@@ -1,16 +1,15 @@
-package demo.controller.user;
+package demo.controller.comment;
 
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
-
+import demo.entity.CommentMess;
+import demo.service.CommentMessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.entity.CommentMess;
-import demo.service.CommentMessService;
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * (CommentMess)表控制层
@@ -58,4 +57,5 @@ public class CommentMessController {
     public CommentMess insertComment(CommentMess commentMess) {
         return commentMessService.insert(commentMess);
     }
+
 }

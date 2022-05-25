@@ -1,11 +1,11 @@
 package demo.dao;
 
-import java.util.List;
-
 import demo.VO.CommentVO;
 import demo.entity.CommentMess;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * (CommentMess)表数据库访问层
@@ -80,5 +80,19 @@ public interface CommentMessDao {
      * @return 对象列表
      */
     List<CommentVO> queryLimt();
+
+    /**
+     * 置顶评论
+     *
+     * @return 对象列表
+     */
+    List<CommentVO> selectTop();
+
+    /**
+     * 查询所有
+     *
+     * @return 对象列表
+     */
+    List<CommentVO> selectAll();
 
 }

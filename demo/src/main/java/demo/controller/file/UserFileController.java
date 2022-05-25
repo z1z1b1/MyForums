@@ -1,13 +1,12 @@
-package demo.controller.user;
-
-import javax.annotation.Resource;
+package demo.controller.file;
 
 import demo.entity.UserFile;
+import demo.service.UserFileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.service.UserFileService;
+import javax.annotation.Resource;
 
 /**
  * (UserFile)表控制层

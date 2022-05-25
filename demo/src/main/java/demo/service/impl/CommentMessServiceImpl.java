@@ -1,17 +1,16 @@
 package demo.service.impl;
 
+import demo.VO.CommentVO;
+import demo.dao.CommentMessDao;
+import demo.entity.CommentMess;
+import demo.service.CommentMessService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
-
-import demo.VO.CommentVO;
-import demo.service.CommentMessService;
-import org.springframework.stereotype.Service;
-
-import demo.dao.CommentMessDao;
-import demo.entity.CommentMess;
 
 /**
  * (CommentMess)表服务实现类
@@ -107,6 +106,7 @@ public class CommentMessServiceImpl implements CommentMessService {
 
     /**
      * 查询个类别前十条数据
+     *
      * @return 对象列表
      */
     @Override
@@ -114,4 +114,23 @@ public class CommentMessServiceImpl implements CommentMessService {
         return this.commentMessDao.queryLimt();
     }
 
+    /**
+     * 置顶评论
+     *
+     * @return 对象列表
+     */
+    @Override
+    public List<CommentVO> selectTop() {
+        return this.commentMessDao.selectTop();
+    }
+
+    /**
+     * 查询所有
+     *
+     * @return 对象列表
+     */
+    @Override
+    public List<CommentVO> selectAll() {
+        return this.commentMessDao.selectAll();
+    }
 }

@@ -1,11 +1,10 @@
 package demo.service;
 
-import java.util.List;
-import java.util.Map;
-
 import demo.VO.CommentVO;
 import demo.entity.CommentMess;
-import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * (CommentMess)表服务接口
@@ -66,7 +65,20 @@ public interface CommentMessService {
 
     /**
      * 查询个类别前十条数据
+     *
      * @return 对象列表
      */
     List<CommentVO> queryLimt();
+
+    /**
+     * 置顶评论
+     *
+     * @return 对象列表
+     */
+    List<CommentVO> selectTop();
+
+    /**
+     * @return
+     */
+    List<CommentVO> selectAll();
 }

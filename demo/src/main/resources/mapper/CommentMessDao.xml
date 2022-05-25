@@ -9,6 +9,8 @@
         <result property="commentContent" column="comment_content" jdbcType="VARCHAR"/>
         <result property="commentMessId" column="comment_mess_id" jdbcType="INTEGER"/>
         <result property="commentUserId" column="comment_user_id" jdbcType="INTEGER"/>
+        <result property="hot" column="hot" jdbcType="INTEGER"/>
+        <result property="top" column="top" jdbcType="INTEGER"/>
         <result property="commentFileByte" column="comment_file" jdbcType="BLOB"/>
         <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
     </resultMap>
@@ -18,6 +20,8 @@
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="commentContent" column="comment_content" jdbcType="VARCHAR"/>
         <result property="commentMessId" column="comment_mess_id" jdbcType="INTEGER"/>
+        <result property="hot" column="hot" jdbcType="INTEGER"/>
+        <result property="top" column="top" jdbcType="INTEGER"/>
         <result property="commentUserId" column="comment_user_id" jdbcType="INTEGER"/>
         <result property="commentFileByte" column="comment_file" jdbcType="BLOB"/>
         <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
@@ -26,32 +30,54 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          comment_id, user_id, comment_content, comment_mess_id, comment_user_id, comment_file, category_id
+        select comment_id,
+               user_id,
+               comment_content,
+               comment_mess_id,
+               comment_user_id,
+               comment_file,
+               category_id,
+               top,
+               hot
         from test_database.comment_mess
         where comment_id = #{commentId}
     </select>
 
     <!--根据发表内容id查询评论-->
     <select id="selectComment" resultMap="BaseResultMap">
-        select
-            comment_id, user_id, comment_content, comment_mess_id, comment_user_id, comment_file, category_id
-        from test_database.comment_mess
+        select comment_id,
+               user_id,
+               comment_content,
+               comment_mess_id,
+               comment_user_id,
+               comment_file,
+               category_id,
+               top,
+               hot
+        from test_database.comment_mess from test_database.comment_mess
         where comment_mess_id = #{commentMessId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          comment_id, user_id, comment_content, comment_mess_id, comment_user_id, comment_file, category_id
-        from test_database.comment_mess
-        limit #{offset}, #{limit}
+        select comment_id,
+               user_id,
+               comment_content,
+               comment_mess_id,
+               comment_user_id,
+               comment_file,
+               category_id,
+               top,
+               hot
+        from test_database.comment_mess from test_database.comment_mess
+        limit #{offset}
+           , #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          comment_id, user_id, comment_content, comment_mess_id, comment_user_id, comment_file, category_id
+        comment_id, user_id, comment_content, comment_mess_id, comment_user_id, comment_file, category_id, top, hot
         from test_database.comment_mess
         <where>
             <if test="commentId != null">
@@ -77,8 +103,11 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="commentId" useGeneratedKeys="true">
-        insert into test_database.comment_mess(user_id, comment_content, comment_mess_id, comment_user_id, comment_file,create_date,category_id)
-        values (#{userId}, #{commentContent}, #{commentMessId}, #{commentUserId}, #{commentFileByte,typeHandler=org.apache.ibatis.type.BlobTypeHandler},#{createDate},#(categoryId))
+        insert into test_database.comment_mess(user_id, comment_content, comment_mess_id, comment_user_id, comment_file,
+                                               create_date, category_id, top, hot)
+        values (#{userId}, #{commentContent}, #{commentMessId}, #{commentUserId},
+                #{commentFileByte,typeHandler=org.apache.ibatis.type.BlobTypeHandler}, #{createDate}, #(categoryId),
+                #(top), #(hot))
     </insert>
 
     <!--通过主键修改数据-->
@@ -103,6 +132,12 @@
             <if test="categoryId != null">
                 category_id = #{categoryId},
             </if>
+            <if test="top != null">
+                top = #{top},
+            </if>
+            <if test="hot != null">
+                hot = #{hot},
+            </if>
         </set>
         where comment_id = #{commentId}
     </update>
@@ -113,12 +148,27 @@
     </delete>
     <!--查询格各类别前十条记录-->
     <select id="queryLimt" resultMap="BaseResultVOMap">
-        SELECT
-            cms.*
-        FROM
-            test_database.comment_mess cms
-        WHERE
-                10 > ( SELECT count(*) FROM test_database.comment_mess WHERE category_id = cms.category_id AND comment_id > cms.comment_id ORDER BY create_date DESC )
+        SELECT cms.*
+        FROM test_database.comment_mess cms
+        WHERE 10 > (SELECT count(*)
+                    FROM test_database.comment_mess
+                    WHERE category_id = cms.category_id
+                      AND comment_id > cms.comment_id
+                    ORDER BY hot DESC)
+          AND cms.comment_user_id IS NULL
+    </select>
+
+    <!--查询置顶-->
+    <select id="selectTop" resultMap="BaseResultVOMap">
+        SELECT cms.*
+        FROM test_database.comment_mess cms
+        WHERE cms.top = 1
+    </select>
+
+    <!--查询所有-->
+    <select id="selectAll" resultMap="BaseResultVOMap">
+        SELECT cms.*
+        FROM test_database.comment_mess cms
     </select>
 
 </mapper>

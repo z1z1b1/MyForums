@@ -1,9 +1,9 @@
 package demo.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * (CommentMess)实体类
@@ -33,6 +33,16 @@ public class CommentMess implements Serializable {
      * 评论消息id
      */
     private Integer commentMessId;
+
+    /**
+     * 热度
+     */
+    private Integer hot;
+
+    /**
+     * 置顶
+     */
+    private Integer top;
     /**
      * 被评论用户id
      */
@@ -70,6 +80,22 @@ public class CommentMess implements Serializable {
 
     public Long getCommentId() {
         return commentId;
+    }
+
+    public Integer getHot() {
+        return hot;
+    }
+
+    public void setHot(Integer hot) {
+        this.hot = hot;
+    }
+
+    public Integer getTop() {
+        return top;
+    }
+
+    public void setTop(Integer top) {
+        this.top = top;
     }
 
     public void setCommentId(Long commentId) {

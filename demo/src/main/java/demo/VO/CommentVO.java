@@ -29,6 +29,17 @@ public class CommentVO {
      * 评论消息id
      */
     private Integer commentMessId;
+
+    /**
+     * 热度(被评论条数)
+     */
+    private Integer hot;
+
+    /**
+     * 热度(被评论条数)
+     */
+    private Integer top;
+
     /**
      * 被评论用户id
      */
@@ -47,6 +58,21 @@ public class CommentVO {
      */
     private Date createDate = new Date();
 
+    public Integer getHot() {
+        return hot;
+    }
+
+    public void setHot(Integer hot) {
+        this.hot = hot;
+    }
+
+    public Integer getTop() {
+        return top;
+    }
+
+    public void setTop(Integer top) {
+        this.top = top;
+    }
 
     public Date getCreateDate() {
         return createDate;
