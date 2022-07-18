@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import demo.VO.UserVO;
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 import demo.service.UserService;
 
 /**
@@ -33,7 +33,7 @@ public class UserController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public UserByUser selectOne(Long id) {
+    public UserControl selectOne(Long id) {
         return this.userService.queryById(id);
     }
 

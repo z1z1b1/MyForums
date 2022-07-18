@@ -2,7 +2,7 @@ package demo.dao;
 
 import java.util.List;
 
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,7 +21,7 @@ public interface UserDao {
      * @param userId 主键
      * @return 实例对象
      */
-    UserByUser queryById(Long userId);
+    UserControl queryById(Long userId);
 
     /**
      * 查询指定行数据
@@ -30,13 +30,13 @@ public interface UserDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<UserByUser> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<UserControl> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
     /**
      * @param userName
      * @return
      */
-    UserByUser selectByName(String userName);
+    UserControl selectByName(String userName);
 
     /**
      * 通过实体作为筛选条件查询
@@ -44,7 +44,7 @@ public interface UserDao {
      * @param user 实例对象
      * @return 对象列表
      */
-    List<UserByUser> queryAll(UserByUser user);
+    List<UserControl> queryAll(UserControl user);
 
     /**
      * 新增数据
@@ -52,7 +52,7 @@ public interface UserDao {
      * @param user 实例对象
      * @return 影响行数
      */
-    int insert(UserByUser user);
+    int insert(UserControl user);
 
     /**
      * 修改数据
@@ -60,7 +60,7 @@ public interface UserDao {
      * @param user 实例对象
      * @return 影响行数
      */
-    int update(UserByUser user);
+    int update(UserControl user);
 
     /**
      * 通过主键删除数据
@@ -76,5 +76,5 @@ public interface UserDao {
      * @param user
      * @return
      */
-    UserByUser login(UserByUser user);
+    UserControl login(UserControl user);
 }

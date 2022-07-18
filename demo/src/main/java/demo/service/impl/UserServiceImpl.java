@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import demo.VO.UserVO;
 import demo.dao.UserDao;
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 import demo.service.UserService;
 import demo.util.TokenUtil;
 
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public UserByUser queryById(Long userId) {
+    public UserControl queryById(Long userId) {
         return this.userDao.queryById(userId);
     }
 
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
      * @return 对象列表
      */
     @Override
-    public List<UserByUser> queryAllByLimit(int offset, int limit) {
+    public List<UserControl> queryAllByLimit(int offset, int limit) {
         return this.userDao.queryAllByLimit(offset, limit);
     }
 
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserByUser selectByName(String userName) {
+    public UserControl selectByName(String userName) {
         return this.userDao.selectByName(userName);
     }
 
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public UserByUser insert(UserByUser user) {
+    public UserControl insert(UserControl user) {
         userDao.insert(user);
         return user;
     }
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public UserByUser update(UserByUser user) {
+    public UserControl update(UserControl user) {
         this.userDao.update(user);
         return this.queryById(user.getUserId());
     }
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserByUser login(UserByUser user) {
+    public UserControl login(UserControl user) {
         return this.userDao.login(user);
     }
 
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String editPassword(UserVO loginUser){
-        UserByUser user = new UserByUser();
+        UserControl user = new UserControl();
         user.setUserId(loginUser.getUserId());
         user.setUserPassword(loginUser.getUserPassword());
         if(this.login(user)==null){
@@ -128,10 +128,10 @@ public class UserServiceImpl implements UserService {
      * @throws JSONException
      */
     @Override
-    public String userLogin(UserByUser loginUser) throws JSONException{
+    public String userLogin(UserControl loginUser) throws JSONException{
 
         //数据库进行检查
-        UserByUser user = this.userDao.login(loginUser);
+        UserControl user = this.userDao.login(loginUser);
 
         JSONObject result = new JSONObject();
         //若正确返回200，若错误返回400

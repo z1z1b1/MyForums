@@ -5,7 +5,7 @@ import java.util.List;
 import demo.VO.UserVO;
 import org.json.JSONException;
 
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 
 /**
  * (User)表服务接口
@@ -21,7 +21,7 @@ public interface UserService {
      * @param userId 主键
      * @return 实例对象
      */
-    UserByUser queryById(Long userId);
+    UserControl queryById(Long userId);
 
     /**
      * 查询多条数据
@@ -30,13 +30,13 @@ public interface UserService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<UserByUser> queryAllByLimit(int offset, int limit);
+    List<UserControl> queryAllByLimit(int offset, int limit);
 
     /**
      * @param userName
      * @return
      */
-    UserByUser selectByName(String userName);
+    UserControl selectByName(String userName);
 
     /**
      * 新增数据
@@ -44,7 +44,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    UserByUser insert(UserByUser user);
+    UserControl insert(UserControl user);
 
     /**
      * 修改数据
@@ -52,7 +52,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    UserByUser update(UserByUser user);
+    UserControl update(UserControl user);
 
     /**
      * 通过主键删除数据
@@ -68,7 +68,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    UserByUser login(UserByUser user);
+    UserControl login(UserControl user);
 
     /**
      * 修改密码
@@ -84,5 +84,5 @@ public interface UserService {
      * @return
      * @throws JSONException
      */
-    String userLogin(UserByUser loginUser) throws JSONException;
+    String userLogin(UserControl loginUser) throws JSONException;
 }

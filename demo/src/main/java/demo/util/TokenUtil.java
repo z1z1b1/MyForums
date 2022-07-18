@@ -6,7 +6,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 
 /**
  * @author 凌
@@ -22,7 +22,7 @@ public class TokenUtil {
      * @param user
      * @return
      */
-    public static String sign(UserByUser user) {
+    public static String sign(UserControl user) {
         String token = null;
         try {
             Date expiresAt = new Date(System.currentTimeMillis() + EXPIRE_TIME);

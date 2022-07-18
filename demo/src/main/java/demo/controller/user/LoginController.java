@@ -1,12 +1,13 @@
-package demo.controller;
+package demo.controller.user;
 
+import demo.entity.CommentMess;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 import demo.service.UserService;
 //import com.example.demo.util.TokenUtil;
 
@@ -22,12 +23,17 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("login")
+    @PostMapping("login")
     @CrossOrigin(origins = "*")
-    public String login(UserByUser user) throws JSONException {
+    public String login(UserControl user) throws JSONException {
 
        return "111";
 
     }
 
+    @PostMapping("register")
+    @CrossOrigin(origins = "*")
+    public UserControl insertComment(UserControl user) {
+        return userService.insert(user);
+    }
 }

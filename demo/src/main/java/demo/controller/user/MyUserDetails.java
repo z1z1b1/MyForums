@@ -1,6 +1,6 @@
-package demo.config;
+package demo.controller.user;
 
-import demo.entity.UserByUser;
+import demo.entity.UserControl;
 import demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -17,7 +17,7 @@ public class MyUserDetails implements UserDetailsService {
     @Override
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserByUser userByUser = userService.selectByName(username);
+        UserControl userByUser = userService.selectByName(username);
         return new User(userByUser.getUserName(), userByUser.getUserPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
  * @author makejava
  * @since 2022-01-19 20:39:06
  */
-public class UserByUser implements Serializable, UserDetails {
+public class UserControl implements Serializable, UserDetails {
     private static final long serialVersionUID = -69339073887533762L;
     /**
      * 用户id
